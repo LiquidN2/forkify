@@ -1,0 +1,9 @@
+.yarn
+architecture
+dist
+.idea
+.parcel-cache
+.pnp.cjs
+yarn.lock
+.editorconfig
+.yarnrc.yml
