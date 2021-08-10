@@ -1,10 +1,19 @@
 {
   "name": "forkify",
-  "packageManager": "yarn@3.0.0",
+  "version": "1.0.0",
+  "description": "",
   "scripts": {
-    "start": "parcel serve './src/index.html'",
-    "build": "parcel build './src/index.html'"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel serve src/index.html",
+    "build": "parcel build src/index.html"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiquidN2/forkify.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -18,15 +27,15 @@
       "last 1 ie version"
     ]
   },
+  "devDependencies": {
+    "@parcel/transformer-image": "^2.0.0-rc.0",
+    "@parcel/transformer-sass": "^2.0.0-rc.0",
+    "parcel": "^2.0.0-rc.0",
+    "postcss": "^8.3.6",
+    "postcss-preset-env": "^6.7.0"
+  },
   "dependencies": {
     "core-js": "^3.16.1",
     "regenerator-runtime": "^0.13.9"
-  },
-  "devDependencies": {
-    "@parcel/transformer-image": "^2.0.0-nightly.1981",
-    "@parcel/transformer-sass": "^2.0.0-alpha.3",
-    "parcel": "next",
-    "postcss": "^8.3.6",
-    "postcss-preset-env": "^6.7.0"
   }
 }

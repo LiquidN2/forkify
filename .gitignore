@@ -1,9 +1,5 @@
-.yarn
 architecture
 dist
 .idea
+node_modules
 .parcel-cache
-.pnp.cjs
-yarn.lock
-.editorconfig
-.yarnrc.yml
