@@ -1,3 +1,6 @@
+import * as model from './model';
+import recipeView from './views/recipeView';
+
 import icons from 'url:../img/icons.svg';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -278,13 +281,22 @@ const displayRecipes = async formE => {
 };
 
 const displayRecipe = async () => {
-  const id = window.location.hash.slice(1);
-  if (!id) return;
+  try {
+    // Get recipe id
+    const id = window.location.hash.slice(1);
+    if (!id) return;
 
-  const recipe = await fetchRecipeAsync(id);
-  if (!recipe) return renderRecipeError();
+    // Load spinner
+    recipeView.renderSpinner();
 
-  renderRecipe(recipe);
+    // Fetch recipe from id
+    await model.loadRecipe(id);
+
+    // Render recipe
+    recipeView.render(model.state.recipe);
+  } catch (e) {
+    renderRecipeError();
+  }
 };
 
 const handleSearchResultsClick = e => {
