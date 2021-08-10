@@ -2,8 +2,8 @@
   "name": "forkify",
   "packageManager": "yarn@3.0.0",
   "scripts": {
-    "start": "parcel serve src/index.html",
-    "build": "parcel build src/index.html"
+    "start": "parcel serve './src/index.html'",
+    "build": "parcel build './src/index.html'"
   },
   "browserslist": {
     "production": [
@@ -18,10 +18,15 @@
       "last 1 ie version"
     ]
   },
+  "dependencies": {
+    "core-js": "^3.16.1",
+    "regenerator-runtime": "^0.13.9"
+  },
   "devDependencies": {
     "@parcel/transformer-image": "^2.0.0-nightly.1981",
     "@parcel/transformer-sass": "^2.0.0-alpha.3",
-    "autoprefixer": "^10.3.1",
-    "parcel": "next"
+    "parcel": "next",
+    "postcss": "^8.3.6",
+    "postcss-preset-env": "^6.7.0"
   }
 }
