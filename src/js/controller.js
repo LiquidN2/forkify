@@ -1,5 +1,6 @@
 import * as model from './model';
 import recipeView from './views/recipeView';
+import searchView from './views/searchView';
 
 import icons from 'url:../img/icons.svg';
 import 'core-js/stable';
@@ -69,19 +70,6 @@ const renderRecipes = recipes => {
   resultsContainer.insertAdjacentHTML('afterbegin', markup);
 };
 
-const renderRecipeError = () => {
-  const markup = `
-    <div class="error">
-      <div>
-        <svg><use href="${icons}#icon-alert-triangle"></use></svg>
-      </div>
-      <p>No recipes found for your query. Please try again!</p>
-    </div>
-  `;
-  recipeContainer.innerHTML = '';
-  recipeContainer.insertAdjacentHTML('afterbegin', markup);
-};
-
 const renderSpinner = parentEl => {
   const markup = `
     <div class="spinner">
@@ -141,7 +129,7 @@ const controlRecipe = async () => {
     // Load spinner
     recipeView.renderSpinner();
 
-    // Fetch recipe from id
+    // Fetch recipe from id and store in state
     await model.loadRecipe(id);
 
     // Render recipe
@@ -173,14 +161,26 @@ const handleSearchResultsClick = e => {
   }
 };
 
+const controlSearch = async () => {
+  try {
+    // Get query from search form
+    const query = searchView.getQuery();
+    if (!query) return;
+
+    // Fetch data from API and store in state
+    await model.loadSearchResults(query);
+  } catch (err) {}
+};
+
 // ------------------------------------------
 // DOM Event Listeners
 // ------------------------------------------
-formSearch.addEventListener('submit', displayRecipes);
+// formSearch.addEventListener('submit', displayRecipes);
 
 searchResultsContainer.addEventListener('click', handleSearchResultsClick);
 
 const init = () => {
+  searchView.addHandlerSearch(controlSearch);
   recipeView.addHandlerRender(controlRecipe);
 };
 init();
