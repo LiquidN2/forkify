@@ -1,6 +1,7 @@
 import * as model from './model';
 import recipeView from './views/recipeView';
 import searchView from './views/searchView';
+import resultsView from './views/resultsView';
 
 import icons from 'url:../img/icons.svg';
 import 'core-js/stable';
@@ -163,24 +164,30 @@ const handleSearchResultsClick = e => {
 
 const controlSearch = async () => {
   try {
+    resultsView.renderSpinner();
+
     // Get query from search form
     const query = searchView.getQuery();
     if (!query) return;
 
     // Fetch data from API and store in state
     await model.loadSearchResults(query);
+
+    // Render results
+    resultsView.render(model.state.search.results);
   } catch (err) {}
 };
 
 // ------------------------------------------
 // DOM Event Listeners
 // ------------------------------------------
-// formSearch.addEventListener('submit', displayRecipes);
 
 searchResultsContainer.addEventListener('click', handleSearchResultsClick);
 
-const init = () => {
+(function init() {
+  // Handle recipe search
   searchView.addHandlerSearch(controlSearch);
+
+  // Handle render recipe
   recipeView.addHandlerRender(controlRecipe);
-};
-init();
+})();
