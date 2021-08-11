@@ -21,7 +21,7 @@ export const loadRecipe = async id => {
       sourceUrl: recipe['source_url'],
       imageUrl: recipe['image_url'],
     };
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    throw err;
   }
 };

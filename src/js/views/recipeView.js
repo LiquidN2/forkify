@@ -2,8 +2,10 @@ import icons from 'url:../../img/icons.svg';
 import { Fraction } from 'fractional';
 
 class RecipeView {
-  #containerElem = document.querySelector('.recipe');
   #data;
+  #containerElem = document.querySelector('.recipe');
+  #errorMessage = 'Recipe not found. Please try another one';
+  #message = 'Start by searching for a recipe or an ingredient. Have fun!';
 
   #clear() {
     this.#containerElem.innerHTML = '';
@@ -131,6 +133,33 @@ class RecipeView {
     `;
 
     this.#containerElem.innerHTML = '';
+    this.#containerElem.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  renderError(message = this.#errorMessage) {
+    const markup = `
+      <div class="error">
+        <div>
+          <svg><use href="${icons}#icon-alert-triangle"></use></svg>
+        </div>
+        <p>${message}</p>
+      </div>
+    `;
+
+    this.#clear();
+    this.#containerElem.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  renderMessage(message = this.#message) {
+    const markup = `
+      <div className="message">
+        <div>
+          <svg><use href="${icons}#icon-smile"></use></svg>
+        </div>
+        <p>${message}</p>
+      </div>`;
+
+    this.#clear();
     this.#containerElem.insertAdjacentHTML('afterbegin', markup);
   }
 
