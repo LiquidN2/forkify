@@ -72,8 +72,27 @@ export default class View {
     this._data = data;
     const newMarkup = this._generateMarkup();
 
+    // Create a virtual DOM in memory from the markup
     const newDOM = document.createRange().createContextualFragment(newMarkup);
-    const newElements = newDOM.querySelectorAll('*');
-    console.log(newElements);
+    const newElements = Array.from(newDOM.querySelectorAll('*'));
+    const curElements = Array.from(this._containerEl.querySelectorAll('*'));
+
+    // Compare the existing DOM with the virtual DOM
+    for (let i = 0; i < newElements.length; i++) {
+      const newEl = newElements[i],
+        currEl = curElements[i];
+
+      // Skip if the new node is the same as current node
+      if (newEl.isEqualNode(currEl)) continue;
+
+      // Update text content
+      if (newEl.firstChild?.nodeValue.trim() !== '')
+        currEl.textContent = newEl.textContent;
+
+      // Update attributes
+      newEl.attributes.forEach(attr =>
+        currEl.setAttribute(attr.name, attr.value)
+      );
+    }
   }
 }

@@ -43,7 +43,7 @@ export const loadRecipe = async id => {
 // SERVING
 // --------------------------
 export const updateServings = servings => {
-  if (servings === 1) return;
+  if (servings === 0) return;
 
   state.recipe.ingredients = state.recipe.ingredients.map(ingredient => {
     if (!ingredient.quantity) return ingredient;

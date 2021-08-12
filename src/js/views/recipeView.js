@@ -134,11 +134,6 @@ class RecipeView extends View {
 
   addHandlerClick(handler) {
     this._containerEl.addEventListener('click', e => {
-      // const btnIncServings = e.target.closest('.btn--increase-servings');
-      // const btnDecServings = e.target.closest('.btn--decrease-servings');
-      // if (btnIncServings) return handler('inc');
-      // if (btnDecServings) handler('dec');
-
       const btnServings = e.target.closest('.btn--tiny');
       if (btnServings) {
         handler(+btnServings.dataset.servings);

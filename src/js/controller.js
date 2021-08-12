@@ -59,7 +59,8 @@ const controlRecipe = async () => {
 
 const controlServings = servings => {
   model.updateServings(servings);
-  recipeView.render(model.state.recipe);
+  // recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
 };
 
 (function init() {
