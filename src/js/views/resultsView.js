@@ -32,8 +32,6 @@ class ResultsView extends View {
   _generateMarkup() {
     return this._data.map(this._generateMarkupPreview).join('');
   }
-
-  addHandlerRender(handler) {}
 }
 
 export default new ResultsView();
