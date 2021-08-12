@@ -40,6 +40,31 @@ export const loadRecipe = async id => {
 };
 
 // --------------------------
+// SERVING
+// --------------------------
+export const updateIngredients = servings => {
+  state.recipe.ingredients = state.recipe.ingredients.map(ingredient => {
+    if (!ingredient.quantity) return ingredient;
+    return {
+      description: ingredient.description,
+      unit: ingredient.unit,
+      quantity: (ingredient.quantity / state.recipe.servings) * servings,
+    };
+  });
+};
+
+export const increaseServings = () => {
+  updateIngredients(state.recipe.servings + 1);
+  state.recipe.servings++;
+};
+
+export const decreaseServings = () => {
+  if (state.recipe.servings === 1) return;
+  updateIngredients(state.recipe.servings - 1);
+  state.recipe.servings--;
+};
+
+// --------------------------
 // SEARCH
 // --------------------------
 export const loadSearchResults = async query => {

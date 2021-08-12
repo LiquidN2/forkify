@@ -9,20 +9,20 @@ class PaginationView extends View {
 
   _generateMarkup() {
     let markup = '';
-    if (this._data.search.currentPage > 1) {
+    if (this._data.currentPage > 1) {
       markup += `
       <button class="btn--inline pagination__btn--prev">
         <svg class="search__icon">
           <use href="${icons}#icon-arrow-left"></use>
         </svg>
-        <span>Page ${this._data.search.currentPage - 1}</span>
+        <span>Page ${this._data.currentPage - 1}</span>
       </button>
     `;
     }
-    if (this._data.search.currentPage < this._data.search.totalPages) {
+    if (this._data.currentPage < this._data.totalPages) {
       markup += `
       <button class="btn--inline pagination__btn--next">
-        <span>Page ${this._data.search.currentPage + 1}</span>
+        <span>Page ${this._data.currentPage + 1}</span>
         <svg class="search__icon">
           <use href="${icons}#icon-arrow-right"></use>
         </svg>
@@ -33,7 +33,7 @@ class PaginationView extends View {
     return markup;
   }
 
-  addHandlerGoTo(handler) {
+  addHandlerClick(handler) {
     this._containerEl.addEventListener('click', e => {
       const btnNext = e.target.closest('.pagination__btn--next');
       const btnPrev = e.target.closest('.pagination__btn--prev');
