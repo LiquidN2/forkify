@@ -4,16 +4,22 @@ import icons from 'url:../../img/icons.svg';
 class ResultsView extends View {
   constructor() {
     const containerEl = document.querySelector('.results');
-    const errorMessage = 'No matching recipe. Please try another.';
+    const errorMessage = 'No matching recipe. Please try another query. 🙂';
     const message = '';
 
     super(containerEl, errorMessage, message);
   }
 
   _generateMarkupPreview(recipe) {
+    // Get recipe id
+    const id = window.location.hash.slice(1);
+
+    // Return markup
     return `
       <li class="preview">
-        <a class="preview__link" href="#${recipe.id}">
+        <a class="preview__link ${
+          id === recipe.id ? 'preview__link--active' : ''
+        }" href="#${recipe.id}">
           <figure class="preview__fig">
             <img src="${recipe.imageUrl}" alt="${recipe.title}" crossorigin/>
           </figure>

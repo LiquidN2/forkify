@@ -5,7 +5,7 @@ import { Fraction } from 'fractional';
 class RecipeView extends View {
   constructor() {
     const containerEl = document.querySelector('.recipe');
-    const errorMessage = 'Recipe not found. Please try another one';
+    const errorMessage = 'Recipe not found. Please try another one 🙂';
     const message =
       'Start by searching for a recipe or an ingredient. Have fun!';
 

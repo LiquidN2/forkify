@@ -44,6 +44,9 @@ const controlRecipe = async () => {
     const id = window.location.hash.slice(1);
     if (!id) return;
 
+    // Update results view to highlight selected recipe
+    resultsView.update(model.getSearchResultsPage());
+
     // Load spinner
     recipeView.renderSpinner();
 
