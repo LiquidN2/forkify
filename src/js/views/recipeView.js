@@ -47,7 +47,9 @@ class RecipeView extends View {
           <svg class="recipe__info-icon">
             <use href="${icons}#icon-clock"></use>
           </svg>
-          <span class="recipe__info-data recipe__info-data--minutes">${this._data.cookingTime}</span>
+          <span class="recipe__info-data recipe__info-data--minutes">${
+            this._data.cookingTime
+          }</span>
           <span class="recipe__info-text">minutes</span>
         </div>
         
@@ -55,16 +57,22 @@ class RecipeView extends View {
           <svg class="recipe__info-icon">
             <use href="${icons}#icon-users"></use>
           </svg>
-          <span class="recipe__info-data recipe__info-data--people">${this._data.servings}</span>
+          <span class="recipe__info-data recipe__info-data--people">${
+            this._data.servings
+          }</span>
           <span class="recipe__info-text">servings</span>
 
           <div class="recipe__info-buttons">
-            <button class="btn--tiny btn--decrease-servings">
+            <button class="btn--tiny btn--decrease-servings" data-servings="${
+              this._data.servings - 1
+            }">
               <svg>
                 <use href="${icons}#icon-minus-circle"></use>
               </svg>
             </button>
-            <button class="btn--tiny btn--increase-servings">
+            <button class="btn--tiny btn--increase-servings" data-servings="${
+              this._data.servings + 1
+            }">
               <svg>
                 <use href="${icons}#icon-plus-circle"></use>
               </svg>
@@ -126,10 +134,15 @@ class RecipeView extends View {
 
   addHandlerClick(handler) {
     this._containerEl.addEventListener('click', e => {
-      const btnIncServings = e.target.closest('.btn--increase-servings');
-      const btnDecServings = e.target.closest('.btn--decrease-servings');
-      if (btnIncServings) return handler('inc');
-      if (btnDecServings) handler('dec');
+      // const btnIncServings = e.target.closest('.btn--increase-servings');
+      // const btnDecServings = e.target.closest('.btn--decrease-servings');
+      // if (btnIncServings) return handler('inc');
+      // if (btnDecServings) handler('dec');
+
+      const btnServings = e.target.closest('.btn--tiny');
+      if (btnServings) {
+        handler(+btnServings.dataset.servings);
+      }
     });
   }
 }

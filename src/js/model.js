@@ -42,7 +42,9 @@ export const loadRecipe = async id => {
 // --------------------------
 // SERVING
 // --------------------------
-export const updateIngredients = servings => {
+export const updateServings = servings => {
+  if (servings === 1) return;
+
   state.recipe.ingredients = state.recipe.ingredients.map(ingredient => {
     if (!ingredient.quantity) return ingredient;
     return {
@@ -51,17 +53,7 @@ export const updateIngredients = servings => {
       quantity: (ingredient.quantity / state.recipe.servings) * servings,
     };
   });
-};
-
-export const increaseServings = () => {
-  updateIngredients(state.recipe.servings + 1);
-  state.recipe.servings++;
-};
-
-export const decreaseServings = () => {
-  if (state.recipe.servings === 1) return;
-  updateIngredients(state.recipe.servings - 1);
-  state.recipe.servings--;
+  state.recipe.servings = servings;
 };
 
 // --------------------------
@@ -106,12 +98,4 @@ export const getSearchResultsPage = (page = state.search.currentPage) => {
   );
 };
 
-export const nextPage = () => {
-  if (state.search.currentPage === state.search.totalPages) return;
-  state.search.currentPage++;
-};
-
-export const prevPage = () => {
-  if (state.search.currentPage === 1) return;
-  state.search.currentPage--;
-};
+export const gotoPage = page => (state.search.currentPage = +page);

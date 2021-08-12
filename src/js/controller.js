@@ -33,12 +33,8 @@ const controlSearch = async () => {
   } catch (err) {}
 };
 
-const controlPagination = actionType => {
-  // Update current page in state
-  if (actionType === 'next') model.nextPage();
-  if (actionType === 'prev') model.prevPage();
-
-  // Update the view (results & pagination)
+const controlPagination = page => {
+  model.gotoPage(page);
   displayResultsandPagination();
 };
 
@@ -61,12 +57,8 @@ const controlRecipe = async () => {
   }
 };
 
-const controlServings = actionType => {
-  // Update the recipe serving in state
-  if (actionType === 'inc') model.increaseServings();
-  if (actionType === 'dec') model.decreaseServings();
-
-  // Update the recipe view
+const controlServings = servings => {
+  model.updateServings(servings);
   recipeView.render(model.state.recipe);
 };
 

@@ -9,25 +9,29 @@ class PaginationView extends View {
 
   _generateMarkup() {
     let markup = '';
+
     if (this._data.currentPage > 1) {
+      const prevPage = this._data.currentPage - 1;
       markup += `
-      <button class="btn--inline pagination__btn--prev">
-        <svg class="search__icon">
-          <use href="${icons}#icon-arrow-left"></use>
-        </svg>
-        <span>Page ${this._data.currentPage - 1}</span>
-      </button>
-    `;
+        <button class="btn--inline pagination__btn--prev" data-goto="${prevPage}">
+          <svg class="search__icon">
+            <use href="${icons}#icon-arrow-left"></use>
+          </svg>
+          <span>Page ${prevPage}</span>
+        </button>
+      `;
     }
+
     if (this._data.currentPage < this._data.totalPages) {
+      const nextPage = this._data.currentPage + 1;
       markup += `
-      <button class="btn--inline pagination__btn--next">
-        <span>Page ${this._data.currentPage + 1}</span>
-        <svg class="search__icon">
-          <use href="${icons}#icon-arrow-right"></use>
-        </svg>
-      </button>
-    `;
+        <button class="btn--inline pagination__btn--next" data-goto="${nextPage}">
+          <span>Page ${nextPage}</span>
+          <svg class="search__icon">
+            <use href="${icons}#icon-arrow-right"></use>
+          </svg>
+        </button>
+      `;
     }
 
     return markup;
@@ -35,11 +39,9 @@ class PaginationView extends View {
 
   addHandlerClick(handler) {
     this._containerEl.addEventListener('click', e => {
-      const btnNext = e.target.closest('.pagination__btn--next');
-      const btnPrev = e.target.closest('.pagination__btn--prev');
-      if (!btnPrev && !btnNext) return;
-      if (btnPrev) return handler('prev');
-      if (btnNext) handler('next');
+      const gotoBtn = e.target.closest('.btn--inline');
+      if (!gotoBtn) return;
+      handler(gotoBtn.dataset.goto);
     });
   }
 }
