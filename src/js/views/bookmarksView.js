@@ -1,12 +1,12 @@
 import View from './View';
 import previewView from './previewView';
 
-class ResultsView extends View {
+class BookmarksView extends View {
   constructor() {
-    const containerEl = document.querySelector('.results');
-    const errorMessage = 'No matching recipe. Please try another query. 🙂';
+    const containerEl = document.querySelector('.bookmarks__list');
+    const errorMessage =
+      'No bookmarks yet. Find a nice recipe and bookmark it 🙂';
     const message = '';
-
     super(containerEl, errorMessage, message);
   }
 
@@ -15,4 +15,4 @@ class ResultsView extends View {
   }
 }
 
-export default new ResultsView();
+export default new BookmarksView();

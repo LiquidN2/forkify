@@ -12,6 +12,7 @@ export const state = {
     currentPage: 1,
     totalPages: 1,
   },
+  bookmarks: [],
 };
 
 // --------------------------
@@ -19,7 +20,7 @@ export const state = {
 // --------------------------
 export const loadRecipe = async id => {
   try {
-    // Fetch data from API
+    // If recipe not in bookmarks, fetch data from API
     const resObj = await getJSON(`${API_URL}/${id}?key=${API_KEY}`);
 
     // Store recipe in state
@@ -34,6 +35,11 @@ export const loadRecipe = async id => {
       sourceUrl: recipe['source_url'],
       imageUrl: recipe['image_url'],
     };
+
+    // Check if recipe is bookmarked
+    state.recipe.bookmarked = state.bookmarks.some(
+      bookmark => bookmark.id === id
+    );
   } catch (err) {
     throw err;
   }
@@ -83,6 +89,9 @@ export const loadSearchResults = async query => {
     state.search.totalPages = Math.ceil(
       state.search.results.length / RESULTS_PER_PAGE
     );
+
+    // Reset current page in state
+    state.search.currentPage = 1;
   } catch (err) {
     throw err;
   }
@@ -99,3 +108,45 @@ export const getSearchResultsPage = (page = state.search.currentPage) => {
 };
 
 export const gotoPage = page => (state.search.currentPage = +page);
+
+// --------------------------
+// BOOKMARK
+// --------------------------
+// export const addBookmark = recipe => {
+//   if (recipe.bookmarked) return;
+//
+//   // Add recipe to bookmarks
+//   state.bookmarks.push(recipe);
+//
+//   // Mark the current recipe as bookmarked
+//   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+// };
+//
+// export const removeBookmark = recipe => {
+//   if (!recipe.bookmarked) return;
+//
+//   // Remove recipe from state
+//   const recipeIndex = state.bookmarks.findIndex(
+//     bookmark => bookmark.id === recipe.id
+//   );
+//   state.bookmarks.copyWithin(recipeIndex, recipeIndex + 1);
+//   --state.bookmarks.length;
+//
+//   if (recipe.id === state.recipe.id) state.recipe.bookmarked = false;
+// };
+
+export const toggleBookmark = recipe => {
+  // Add recipe if not bookmarked
+  if (!recipe.bookmarked) {
+    state.bookmarks.push(recipe);
+  } else {
+    const recipeIndex = state.bookmarks.findIndex(
+      bookmark => bookmark.id === recipe.id
+    );
+    state.bookmarks.copyWithin(recipeIndex, recipeIndex + 1);
+    --state.bookmarks.length;
+  }
+
+  if (recipe.id === state.recipe.id)
+    state.recipe.bookmarked = !state.recipe.bookmarked;
+};
