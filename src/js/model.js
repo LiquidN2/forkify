@@ -112,28 +112,14 @@ export const gotoPage = page => (state.search.currentPage = +page);
 // --------------------------
 // BOOKMARK
 // --------------------------
-// export const addBookmark = recipe => {
-//   if (recipe.bookmarked) return;
-//
-//   // Add recipe to bookmarks
-//   state.bookmarks.push(recipe);
-//
-//   // Mark the current recipe as bookmarked
-//   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
-// };
-//
-// export const removeBookmark = recipe => {
-//   if (!recipe.bookmarked) return;
-//
-//   // Remove recipe from state
-//   const recipeIndex = state.bookmarks.findIndex(
-//     bookmark => bookmark.id === recipe.id
-//   );
-//   state.bookmarks.copyWithin(recipeIndex, recipeIndex + 1);
-//   --state.bookmarks.length;
-//
-//   if (recipe.id === state.recipe.id) state.recipe.bookmarked = false;
-// };
+const persistBookmarks = () =>
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+
+export const clearBookmarks = () => {
+  localStorage.removeItem('bookmarks');
+  state.bookmarks = [];
+  state.recipe.bookmarked = false;
+};
 
 export const toggleBookmark = recipe => {
   // Add recipe if not bookmarked
@@ -149,4 +135,13 @@ export const toggleBookmark = recipe => {
 
   if (recipe.id === state.recipe.id)
     state.recipe.bookmarked = !state.recipe.bookmarked;
+
+  persistBookmarks();
 };
+
+const init = () => {
+  const storage = localStorage.getItem('bookmarks');
+  if (storage) state.bookmarks = JSON.parse(storage);
+};
+
+init();

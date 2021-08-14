@@ -61,6 +61,7 @@ const controlRecipe = async () => {
     bookmarksView.update(model.state.bookmarks);
   } catch (err) {
     recipeView.renderError();
+    console.error(err);
   }
 };
 
@@ -81,7 +82,13 @@ const controlBookmark = () => {
   bookmarksView.render(model.state.bookmarks);
 };
 
+const controlBookmarks = () => {
+  bookmarksView.render(model.state.bookmarks);
+};
+
 (function init() {
+  bookmarksView.addHandlerRender(controlBookmarks);
+
   // Handle recipe search
   searchView.addHandlerSearch(controlSearch);
 
