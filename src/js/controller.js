@@ -6,6 +6,7 @@ import recipeView from './views/recipeView';
 import searchView from './views/searchView';
 import resultsView from './views/resultsView';
 import bookmarksView from './views/bookmarksView';
+import addRecipeView from './views/addRecipeView';
 import paginationView from './views/paginationView';
 
 // https://forkify-api.herokuapp.com/v2
@@ -87,6 +88,7 @@ const controlBookmarks = () => {
 };
 
 (function init() {
+  // Render bookmarks saved in localStorage
   bookmarksView.addHandlerRender(controlBookmarks);
 
   // Handle recipe search
