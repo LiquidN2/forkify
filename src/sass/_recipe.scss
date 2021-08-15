@@ -117,6 +117,10 @@
       width: 2.25rem;
       fill: $color-primary;
     }
+
+    &--hidden {
+      visibility: hidden;
+    }
   }
 
   ///////////

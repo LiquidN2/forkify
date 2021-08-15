@@ -10,6 +10,8 @@ class PreviewView extends View {
     // Get recipe id
     const id = window.location.hash.slice(1);
 
+    console.log(recipe.key);
+
     // Return markup
     return `
       <li class="preview">
@@ -22,9 +24,16 @@ class PreviewView extends View {
           <div class="preview__data">
             <h4 class="preview__title">${recipe.title}</h4>
             <p class="preview__publisher">${recipe.publisher}</p>
-            <div class="preview__user-generated">
-              <svg><use href="${icons}#icon-user"></use></svg>
-            </div>
+            ${
+              recipe.key
+                ? `
+                <div class="preview__user-generated">
+                  <svg><use href="${icons}#icon-user"></use></svg>
+                </div>
+              `
+                : ''
+            }
+
           </div>
         </a>
       </li>

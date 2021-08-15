@@ -24,8 +24,12 @@ class RecipeView extends View {
             : ''
         }
         <div class="recipe__description">
-          <span class="recipe__unit">${ingredient.unit}</span>
-            ${ingredient.description}
+          ${
+            ingredient.unit
+              ? `<span class="recipe__unit">${ingredient.unit}</span>`
+              : ''
+          }          
+          ${ingredient.description}
         </div>
       </li>
     `;
@@ -75,7 +79,9 @@ class RecipeView extends View {
           </div>
         </div>
 
-        <div class="recipe__user-generated">
+        <div class="recipe__user-generated ${
+          this._data.key ? '' : 'recipe__user-generated--hidden'
+        }">
           <svg><use href="${icons}#icon-user"></use></svg>
         </div>
         

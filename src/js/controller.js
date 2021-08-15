@@ -30,6 +30,8 @@ const controlSearch = async () => {
 
     // Render pagination based on current page
     paginationView.render(model.state.search);
+
+    console.log(model.state.search);
   } catch (err) {}
 };
 
@@ -62,6 +64,8 @@ const controlRecipe = async () => {
     recipeView.render(model.state.recipe);
 
     bookmarksView.update(model.state.bookmarks);
+
+    console.log(model.state.recipe);
   } catch (err) {
     recipeView.renderError();
     console.error(err);
@@ -102,6 +106,12 @@ const controlAddRecipe = async newRecipe => {
 
     // Render success message
     addRecipeView.renderMessage();
+
+    // Render bookmark view
+    bookmarksView.render(model.state.bookmarks);
+
+    // Change URL ID
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
 
     // Close modal
     setTimeout(() => {

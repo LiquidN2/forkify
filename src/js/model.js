@@ -1,5 +1,5 @@
 import { API_KEY, API_URL, RESULTS_PER_PAGE } from './config';
-import { getJSON, sendJSON } from './helpers';
+import { AJAX } from './helpers';
 
 // --------------------------
 // APPLICATION STATE
@@ -38,7 +38,7 @@ const createRecipeObj = resObj => {
 export const loadRecipe = async id => {
   try {
     // If recipe not in bookmarks, fetch data from API
-    const resObj = await getJSON(`${API_URL}/${id}?key=${API_KEY}`);
+    const resObj = await AJAX(`${API_URL}/${id}?key=${API_KEY}`);
 
     // Store recipe in state
     state.recipe = createRecipeObj(resObj);
@@ -151,7 +151,7 @@ export const uploadRecipe = async newRecipe => {
     recipe['cooking_time'] = +newRecipe.cookingTime;
     recipe['source_url'] = newRecipe.sourceUrl;
 
-    const resObj = await sendJSON(`${API_URL}?key=${API_KEY}`, recipe);
+    const resObj = await AJAX(`${API_URL}?key=${API_KEY}`, recipe);
     state.recipe = createRecipeObj(resObj);
     addBookmark(state.recipe);
   } catch (err) {
@@ -168,7 +168,7 @@ export const loadSearchResults = async query => {
     state.search.query = query;
 
     // Fetch data from API
-    const resObj = await getJSON(
+    const resObj = await AJAX(
       `${API_URL}?search=${state.search.query}&key=${API_KEY}`
     );
 
@@ -178,6 +178,7 @@ export const loadSearchResults = async query => {
         id: recipe.id,
         title: recipe.title,
         publisher: recipe.publisher,
+        key: recipe.key,
         imageUrl: recipe['image_url'],
       };
     });
