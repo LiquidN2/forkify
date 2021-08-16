@@ -1,3 +1,5 @@
+import '../sass/main.scss';
+
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
@@ -30,8 +32,6 @@ const controlSearch = async () => {
 
     // Render pagination based on current page
     paginationView.render(model.state.search);
-
-    console.log(model.state.search);
   } catch (err) {}
 };
 
@@ -64,8 +64,6 @@ const controlRecipe = async () => {
     recipeView.render(model.state.recipe);
 
     bookmarksView.update(model.state.bookmarks);
-
-    console.log(model.state.recipe);
   } catch (err) {
     recipeView.renderError();
     console.error(err);

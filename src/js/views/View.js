@@ -1,5 +1,3 @@
-import icons from 'url:../../img/icons.svg';
-
 export default class View {
   _data;
 
@@ -20,7 +18,7 @@ export default class View {
   renderSpinner() {
     const markup = `
       <div class="spinner">
-        <svg><use href="${icons}#icon-loader"></use></svg>
+        <svg><use href="img/icons.svg#icon-loader"></use></svg>
       </div>
     `;
 
@@ -32,7 +30,7 @@ export default class View {
     const markup = `
       <div class="error">
         <div>
-          <svg><use href="${icons}#icon-alert-triangle"></use></svg>
+          <svg><use href="img/icons.svg#icon-alert-triangle"></use></svg>
         </div>
         <p>${message}</p>
       </div>
@@ -46,7 +44,7 @@ export default class View {
     const markup = `
       <div class="message">
         <div>
-          <svg><use href="${icons}#icon-smile"></use></svg>
+          <svg><use href="img/icons.svg#icon-smile"></use></svg>
         </div>
         <p>${message}</p>
       </div>`;

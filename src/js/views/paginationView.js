@@ -1,5 +1,4 @@
 import View from './View';
-import icons from 'url:../../img/icons.svg';
 
 class PaginationView extends View {
   constructor() {
@@ -15,7 +14,7 @@ class PaginationView extends View {
       markup += `
         <button class="btn--inline pagination__btn--prev" data-goto="${prevPage}">
           <svg class="search__icon">
-            <use href="${icons}#icon-arrow-left"></use>
+            <use href="img/icons.svg#icon-arrow-left"></use>
           </svg>
           <span>Page ${prevPage}</span>
         </button>
@@ -28,7 +27,7 @@ class PaginationView extends View {
         <button class="btn--inline pagination__btn--next" data-goto="${nextPage}">
           <span>Page ${nextPage}</span>
           <svg class="search__icon">
-            <use href="${icons}#icon-arrow-right"></use>
+            <use href="img/icons.svg#icon-arrow-right"></use>
           </svg>
         </button>
       `;

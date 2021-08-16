@@ -1,5 +1,4 @@
 import View from './View';
-import icons from 'url:../../img/icons.svg';
 
 class PreviewView extends View {
   constructor() {
@@ -9,8 +8,6 @@ class PreviewView extends View {
   generateMarkup(recipe) {
     // Get recipe id
     const id = window.location.hash.slice(1);
-
-    console.log(recipe.key);
 
     // Return markup
     return `
@@ -28,7 +25,7 @@ class PreviewView extends View {
               recipe.key
                 ? `
                 <div class="preview__user-generated">
-                  <svg><use href="${icons}#icon-user"></use></svg>
+                  <svg><use href="img/icons.svg#icon-user"></use></svg>
                 </div>
               `
                 : ''

@@ -1,5 +1,7 @@
 architecture
-dist
+dist/*.html
+dist/*.css
+dist/*.js
 .idea
 node_modules
 .parcel-cache
